@@ -1,7 +1,7 @@
 <header class="p-2">
   <div class="container">
     <div class="d-flex flex-wrap justify-content-center justify-content-lg-start">
-      <a href="/" class="mb-2 mb-lg-0 text-decoration-none">
+      <a href="#" class="mb-2 mb-lg-0 text-decoration-none">
         <img
           width="50"
           alt="{{ title }}"
@@ -10,15 +10,15 @@
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a class="nav-link px-2 text-secondary">Home</a></li>
-        <li><a class="nav-link px-2 text-white">FAQs</a></li>
-        <li><a href="https://github.com/Chimera-Development" class="nav-link px-2 text-white">Github</a></li>
-        <li><a class="nav-link px-2 text-white">About</a></li>
+        <li><a routerLinkActive="text-white" routerLink="/home" class="nav-link px-2 text-secondary">Home</a></li>
+        <li><a routerLinkActive="text-white" routerLink="/faq" class="nav-link px-2 text-secondary">FAQs</a></li>
+        <li><a href="https://github.com/Chimera-Development" class="nav-link px-2 text-secondary">Github</a></li>
+        <li><a routerLinkActive="text-white" routerLink="/about" class="nav-link px-2 text-secondary">About</a></li>
       </ul>
-
       <div class="text-end">
         <button type="button" class="btn btn-outline-light" (click)="onLoginClicked()">Login</button>
       </div>
+
     </div>
   </div>
 </header>

@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeItemComponent } from './home/home-item/home-item.component';
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FaqComponent } from './faq/faq.component';
     FaqComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

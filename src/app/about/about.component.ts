@@ -1,28 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Member} from "../model/member";
+import {Router} from "@angular/router";
+import {TeamService} from "./team.service";
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent {
-  team: Member[] = [
-    new Member('Patsore',
-      'https://avatars.githubusercontent.com/u/80210497?v=4',
-      'Project Lead',
-      'https://github.com/patsore'),
-    new Member('Shrecknt',
-      'https://avatars.githubusercontent.com/u/58538423?v=4',
-      'Developer',
-      'https://github.com/Shrecknt'),
-    new Member('JamSharp',
-      'https://avatars.githubusercontent.com/u/79325704?v=4',
-      'Developer',
-      'https://github.com/jms-c')
-    // new Member('Bluefox',
-    //   'https://avatars.githubusercontent.com/u/58538423?v=4',
-    //   'Developer',
-    //   'https://github.com/Shrecknt')
-  ]
+export class AboutComponent implements OnInit {
+  team!: Member[]
+
+
+  constructor(private teamService: TeamService) { }
+
+  ngOnInit(): void {
+    this.team = this.teamService.getTeamMembers()
+  }
+
+  onClickDiscord() {
+    window.open('https://discord.com/')
+  }
+  onClickGithub() {
+    window.open('https://github.com/Chimera-Development')
+  }
 }
