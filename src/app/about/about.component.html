@@ -1,0 +1,27 @@
+<div class="row text-center">
+  <div class="col-md-4" *ngFor="let member of team;">
+    <div class="row">
+      <div class="col p-4 position-static">
+        <div class="col">
+          <img class="rounded-circle" width="140" height="140" src="{{ member.icon }}">
+          <h2>{{ member.username }}</h2>
+          <p>{{ member.description }}</p>
+          <a class="btn btn-secondary" href="{{ member.link }}">
+            <i class="bi bi-github"></i> Github &raquo;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="padding-top: 20px">
+    <div class="col align-content-center">
+      <p><button class="w-50 btn btn-outline-primary">
+        <i class="bi bi-discord"></i> Discord
+      </button></p>
+      <p><button class="w-50 btn btn-outline-light">
+        <i class="bi bi-github"></i> Github
+      </button></p>
+    </div>
+  </div>
+</div>

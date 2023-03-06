@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-black">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">{{ title }}</h1>
+      <p class="lead my-3">Chimera Client is a modular utility client for Minecraft Java edition that allows you to
+        customize your gameplay with various hacks and modules. It is mainly focused on extensibility.</p>
+            <p class="lead mb-0"><a href="#" class="text-white fw-bold">Learn more...</a></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <ul class="list">
+      <li class="list-group-item border rounded shadow-sm" *ngFor="let update of updates">
+<!--        h-md-250 flex-md-row-->
+        <app-home-item [updateCard]="update"></app-home-item>
+      </li>
+    </ul>
+  </div>
+</div>
