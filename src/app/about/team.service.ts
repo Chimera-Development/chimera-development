@@ -18,10 +18,6 @@ export class TeamService {
       'https://jamsharp.net/assets/CircleBranding.png',
       'Developer',
       'https://github.com/jms-c')
-    // new Member('Bluefox',
-    //   'https://avatars.githubusercontent.com/u/58538423?v=4',
-    //   'Developer',
-    //   'https://github.com/Shrecknt')
   ]
 
   getTeamMembers():Member[] {
