@@ -5,6 +5,7 @@ import {FaqComponent} from "./faq/faq.component";
 import {AboutComponent} from "./about/about.component";
 import {HomeComponent} from "./home/home.component";
 import {AuthComponent} from "./auth/auth.component";
+import {ErrorComponent} from "./error/error.component";
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
@@ -12,7 +13,8 @@ const appRoutes:Routes = [
   {path:'faq', component:FaqComponent},
   {path:'about', component:AboutComponent},
   {path:'auth', component:AuthComponent},
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  {path:'error', component:ErrorComponent, data:{ message: '404 | not found'} },
+  { path: '**', redirectTo: '/error', pathMatch: 'full' }
 ]
 
 @NgModule({

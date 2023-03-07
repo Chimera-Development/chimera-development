@@ -11,6 +11,7 @@ import {FaqComponent} from './faq/faq.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpClientModule} from "@angular/common/http";
     HomeComponent,
     HomeItemComponent,
     AboutComponent,
-    FaqComponent
+    FaqComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
