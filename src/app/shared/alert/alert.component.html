@@ -1,0 +1,12 @@
+<div class="backdrop" (click)="onClose()">
+  <div class="alert-box rounded bg-dark">
+    <h5>Error</h5>
+    <hr>
+    <div class="text-center">
+      <p>{{ message }}</p>
+    </div>
+    <div class="alert-box-actions">
+      <button type="button" class="btn btn-outline-light" (click)="onClose()">Close</button>
+    </div>
+  </div>
+</div>

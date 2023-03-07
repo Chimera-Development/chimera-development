@@ -12,6 +12,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ErrorComponent } from './error/error.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ErrorComponent } from './error/error.component';
     HomeItemComponent,
     AboutComponent,
     FaqComponent,
-    ErrorComponent
+    ErrorComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
