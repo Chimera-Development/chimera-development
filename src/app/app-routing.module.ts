@@ -11,14 +11,15 @@ const appRoutes:Routes = [
   {path:'home', component:HomeComponent},
   {path:'faq', component:FaqComponent},
   {path:'about', component:AboutComponent},
-  {path:'auth', component:AuthComponent}
+  {path:'auth', component:AuthComponent},
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ]
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, {useHash: true})
   ],
   exports: [
     RouterModule

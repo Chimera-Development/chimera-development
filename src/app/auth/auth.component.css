@@ -32,3 +32,14 @@ form input[type="password"] {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+  -webkit-text-fill-color: darkgray;
+  -webkit-border-radius: 0;
+}
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #212529 inset !important;
+  -webkit-text-fill-color: darkgray;
+  -webkit-border-radius: 0;
+}
