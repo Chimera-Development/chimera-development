@@ -18,4 +18,15 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build -- --output-path docs --base-href /chimera/
+        run: npm run build -- --output-path docs --base-href /
+
+      - name: Copy
+        uses: andstor/copycat-action@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          src_path: docs/.
+          dst_path: /.
+          dst_owner: chimera-development
+          dst_repo_name: chimera-development.github.io
+          dst_branch: main
+          src_branch: main
