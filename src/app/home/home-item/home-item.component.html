@@ -10,7 +10,8 @@
         <p class="blockquote-footer">{{ update.developer }}</p>
       </div>
 
-    <a href="{{ update.referenceLink }}" class="stretched-link">See details</a>
+    <a href="{{ update.referenceLink }}" class="link-primary bi-info">See details...</a>
+    <a (click)="onElementSelected()" class="stretched-link"></a>
   </div>
   <div class="col-auto d-none d-lg-block">
     <img alt="" src="{{ update.image }}">

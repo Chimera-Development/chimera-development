@@ -6,10 +6,13 @@ import {AboutComponent} from "./about/about.component";
 import {HomeComponent} from "./home/home.component";
 import {AuthComponent} from "./auth/auth.component";
 import {ErrorComponent} from "./error/error.component";
+import {HomeEditComponent} from "./home/home-edit/home-edit.component";
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
-  {path:'home', component:HomeComponent},
+  {path:'home', component:HomeComponent, children: [
+      {path: ':id/edit', component: HomeEditComponent}
+    ]},
   {path:'faq', component:FaqComponent},
   {path:'about', component:AboutComponent},
   {path:'auth', component:AuthComponent},

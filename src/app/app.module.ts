@@ -9,10 +9,11 @@ import {HomeItemComponent} from './home/home-item/home-item.component';
 import {AboutComponent} from './about/about.component';
 import {FaqComponent} from './faq/faq.component';
 import {AppRoutingModule} from "./app-routing.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ErrorComponent } from './error/error.component';
 import { AlertComponent } from './shared/alert/alert.component';
+import { HomeEditComponent } from './home/home-edit/home-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +25,14 @@ import { AlertComponent } from './shared/alert/alert.component';
     AboutComponent,
     FaqComponent,
     ErrorComponent,
-    AlertComponent
+    AlertComponent,
+    HomeEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
