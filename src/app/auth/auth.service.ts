@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private client:HttpClient) { }
 
   login(email:string, password:string): Observable<AuthResponse> {
-    return this.client.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.api_key,
+    return this.client.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.FIREBASE_API_KEY,
       {
         email,
         password,
