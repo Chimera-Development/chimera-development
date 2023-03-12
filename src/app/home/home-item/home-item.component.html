@@ -3,32 +3,37 @@
 
     <div class="col-md-8">
       <div class="card-body">
-        <h3>{{ update.title }}</h3>
-        <div class="mb-1 text-muted">{{ update.date | date }}</div>
+        <h4>{{ update.title }}</h4>
+        <div class="mb-1 text-muted small">{{ update.date | date }}</div>
         <p class="card-text mb-auto">{{ update.description }}</p>
 
         <hr style="width: 5em">
-        <div class="row" *ngIf="update.quote">
+        <div class="row small" *ngIf="update.quote">
           <blockquote class="bi-chat-quote"> {{ update.quote }}</blockquote>
           <p class="blockquote-footer">{{ update.developer }}</p>
         </div>
 
-        <a href="{{ update.referenceLink }}" class="link-primary bi-info">See details...</a>
+        <div class="d-flex flex-row-reverse align-items-end">
+          <div class="flex-column small">
+            <a href="{{ update.referenceLink }}" class="link-primary bi-info">See details...</a>
+          </div>
 
-        <div class="d-flex align-items-center justify-content-end">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary"
-                    (click)="onUpdateSelected()">Edit</button>
-            <button type="button" class="btn btn-sm btn-outline-danger"
-                    (click)="onUpdateDelete()">Delete</button>
+          <div class="col">
+            <div class="align-items-center btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary"
+                      (click)="onUpdateSelected()">Edit</button>
+              <button type="button" class="btn btn-sm btn-outline-danger"
+                      (click)="onUpdateDelete()">Delete</button>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card-img-top img-fluid">
-        <img alt="" src="{{ update.image }}">
+      <div class="card-img-top">
+        <img class="rounded img-fluid" alt="" src="{{ update.image }}">
       </div>
     </div>
 
