@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UpdateService} from "../update.service";
 import {Update} from "../../model/update";
 
@@ -13,32 +13,78 @@ export class HomeEditComponent implements OnInit {
   componentId!: number
   editForm!: FormGroup
   quoteExpanded: boolean = false;
+  isEdit = true
 
-  constructor(private route: ActivatedRoute, private updateService: UpdateService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private updateService: UpdateService) {
+  }
+
+  private initForm(): void {
+    let titleInput:string = ''
+    let descriptionInput:string = ''
+    let detailUrl:string = ''
+    let imageUrl:string = ''
+    let userName:string = ''
+    let quote:string = ''
+
+    if(this.isEdit) {
+      const update = this.updateService.getUpdate(this.componentId)
+      titleInput = update.title
+      descriptionInput = update.description
+      detailUrl = update.referenceLink
+      imageUrl = update.image
+      if(update.quote != null) {
+        userName = update.developer!
+        quote = update.quote!
+      }
+    }
+
+    this.editForm = new FormGroup({
+      'titleInput': new FormControl(titleInput, Validators.required),
+      'descriptionInput': new FormControl(descriptionInput, Validators.required),
+      'detailUrl': new FormControl(detailUrl, Validators.required),
+      'imageUrl': new FormControl(imageUrl, Validators.required),
+
+      userQuote: new FormGroup({
+        'userName': new FormControl(userName),
+        'quote': new FormControl(quote)
+      })
+    })
+  }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params)=> {
-        this.componentId = params['id']
+    this.isEdit = this.route.snapshot.queryParams['edit']
 
-        let update:Update = this.updateService.getUpdate(this.componentId)
-
-        this.editForm = new FormGroup({
-          titleInput: new FormControl(update.title, Validators.required),
-          descriptionInput: new FormControl(update.description, Validators.required),
-          detailUrl: new FormControl(update.referenceLink, Validators.required),
-          imageUrl: new FormControl(update.image, Validators.required),
-
-          userQuote: new FormGroup({
-            userName: new FormControl(update.developer),
-            quote: new FormControl(update.quote)
-          })
-        })
-      }
-    )
+    this.route.params.subscribe(params => {
+      this.componentId = params['id']
+      this.initForm()
+    })
   }
 
   onSubmit() {
-    console.log(this.editForm.value)
+    const update = new Update(
+      this.editForm.value.titleInput,
+      new Date(Date.now()),
+      this.editForm.value.descriptionInput,
+      this.editForm.value.imageUrl,
+      this.editForm.value.detailUrl,
+      this.editForm.value.userQuote.quote,
+      this.editForm.value.userQuote.userName
+    )
+
+    if(this.isEdit) {
+      this.updateService.updateUpdate(this.componentId, update)
+    } else {
+      this.updateService.createUpdate(update)
+    }
+
+    this.onNavigate()
+  }
+
+  onNavigate() {
+    this.isEdit = false
+    this.router.navigate(['../'], {relativeTo: this.route}).then()
   }
 }

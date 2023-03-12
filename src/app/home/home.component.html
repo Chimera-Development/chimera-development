@@ -10,7 +10,11 @@
 
   <div>
     <div class="justify-content-center">
+
       <div class="list-group mx-0 col-md-8">
+        <button class="btn btn-outline-info w-25"
+                (click)="onNewUpdate()">New update</button>
+        <hr class="w-25">
         <router-outlet></router-outlet>
       </div>
 
@@ -18,11 +22,9 @@
         <div class="col album py-4">
           <div class="container">
             <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
-              <div class="border rounded border-0 shadow-none"
-                   routerLinkActive="active"
-                   *ngFor="let update of updates; let i = index;">
-                <app-home-item [updateCard]="update" [itemId]="i"></app-home-item>
-              </div>
+                <app-home-item
+                  *ngFor="let update of updates; let i = index;"
+                  [updateCard]="update" [itemId]="i"></app-home-item>
             </div>
           </div>
         </div>

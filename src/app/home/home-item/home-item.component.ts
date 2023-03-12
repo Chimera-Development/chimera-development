@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Update} from "../../model/update";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UpdateService} from "../update.service";
 
 @Component({
   selector: 'app-home-item',
@@ -11,13 +12,20 @@ export class HomeItemComponent {
   @Input('updateCard') update!: Update
   @Input('itemId') id!:number
 
-  constructor(private router:Router, private route:ActivatedRoute) { }
+  constructor(
+    private updateService:UpdateService,
+    private router:Router,
+    private route:ActivatedRoute) { }
 
-  onElementSelected() {
-    this.router.navigate([this.id + '/edit'], { relativeTo: this.route}).then()
+  onUpdateSelected() {
+    this.router.navigate([this.id], {
+        queryParams: {edit: 1},
+        relativeTo: this.route
+      }
+    ).then()
   }
 
-  onElementDelete() {
-    console.log('Delete Element' + this.id)
+  onUpdateDelete() {
+    this.updateService.deleteUpdate(this.id)
   }
 }

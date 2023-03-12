@@ -11,7 +11,8 @@ import {HomeEditComponent} from "./home/home-edit/home-edit.component";
 const appRoutes:Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
   {path:'home', component:HomeComponent, children: [
-      {path: ':id/edit', component: HomeEditComponent}
+      {path: 'new', component: HomeEditComponent},
+      {path: ':id', component: HomeEditComponent}
     ]},
   {path:'faq', component:FaqComponent},
   {path:'about', component:AboutComponent},
