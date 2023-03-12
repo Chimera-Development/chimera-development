@@ -16,4 +16,8 @@ export class HomeItemComponent {
   onElementSelected() {
     this.router.navigate([this.id + '/edit'], { relativeTo: this.route}).then()
   }
+
+  onElementDelete() {
+    console.log('Delete Element' + this.id)
+  }
 }

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {UpdateService} from "../update.service";
+import {Update} from "../../model/update";
 
 @Component({
   selector: 'app-home-edit',
@@ -12,24 +14,24 @@ export class HomeEditComponent implements OnInit {
   editForm!: FormGroup
   quoteExpanded: boolean = false;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private updateService: UpdateService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (params)=> {
         this.componentId = params['id']
 
+        let update:Update = this.updateService.getUpdate(this.componentId)
+
         this.editForm = new FormGroup({
-          titleInput: new FormControl('Title here.', Validators.required),
-          descriptionInput: new FormControl('Lorem Ipsum', Validators.required),
-          detailUrl: new FormControl('github.com/markm001', Validators.required),
-          imageUrl: new FormControl(
-            'https://www.minecraft.net/content/dam/community/fy22/community-news/ccp2-stage-recap/recapthumb-440x250.png',
-            Validators.required),
+          titleInput: new FormControl(update.title, Validators.required),
+          descriptionInput: new FormControl(update.description, Validators.required),
+          detailUrl: new FormControl(update.referenceLink, Validators.required),
+          imageUrl: new FormControl(update.image, Validators.required),
 
           userQuote: new FormGroup({
-            userName: new FormControl(null),
-            quote: new FormControl(null)
+            userName: new FormControl(update.developer),
+            quote: new FormControl(update.quote)
           })
         })
       }

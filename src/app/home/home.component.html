@@ -8,16 +8,27 @@
     </div>
   </div>
 
-  <div class="row">
-    <router-outlet></router-outlet>
+  <div>
+    <div class="justify-content-center">
+      <div class="list-group mx-0 col-md-8">
+        <router-outlet></router-outlet>
+      </div>
+
+      <div class="list-group mx-0">
+        <div class="col album py-4">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
+              <div class="border rounded border-0 shadow-none"
+                   routerLinkActive="active"
+                   *ngFor="let update of updates; let i = index;">
+                <app-home-item [updateCard]="update" [itemId]="i"></app-home-item>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="row">
-    <ul class="list">
-      <li class="list-group-item border rounded shadow-sm"
-          *ngFor="let update of updates; let i = index;">
-        <app-home-item [updateCard]="update" [itemId]="i"></app-home-item>
-      </li>
-    </ul>
-  </div>
 </div>

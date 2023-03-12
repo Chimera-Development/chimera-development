@@ -26,4 +26,8 @@ export class UpdateService {
   getUpdates(): Update[] {
     return this.updates.slice()
   }
+
+  getUpdate(componentId: number) {
+    return this.getUpdates()[componentId]
+  }
 }

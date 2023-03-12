@@ -1,20 +1,36 @@
-<div class="row g-0 overflow-hidden flex-md-row mb-4 position-relative">
-  <div class="col position-static" style="padding:2px">
-    <h3>{{ update.title }}</h3>
-    <div class="mb-1 text-muted">{{ update.date | date }}</div>
-    <p class="card-text mb-auto">{{ update.description }}</p>
+<div class="card bg-dark border-0 shadow-sm">
+  <div class="row g-0">
 
-      <hr style="width: 5em">
-      <div class="row" *ngIf="update.quote">
-        <blockquote class="bi-chat-quote"> {{ update.quote }}</blockquote>
-        <p class="blockquote-footer">{{ update.developer }}</p>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h3>{{ update.title }}</h3>
+        <div class="mb-1 text-muted">{{ update.date | date }}</div>
+        <p class="card-text mb-auto">{{ update.description }}</p>
+
+        <hr style="width: 5em">
+        <div class="row" *ngIf="update.quote">
+          <blockquote class="bi-chat-quote"> {{ update.quote }}</blockquote>
+          <p class="blockquote-footer">{{ update.developer }}</p>
+        </div>
+
+        <a href="{{ update.referenceLink }}" class="link-primary bi-info">See details...</a>
+
+        <div class="d-flex align-items-center justify-content-end">
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary"
+                    (click)="onElementSelected()">Edit</button>
+            <button type="button" class="btn btn-sm btn-outline-danger"
+                    (click)="onElementDelete()">Delete</button>
+          </div>
+        </div>
       </div>
+    </div>
 
-    <a href="{{ update.referenceLink }}" class="link-primary bi-info">See details...</a>
-    <a (click)="onElementSelected()" class="stretched-link"></a>
-  </div>
-  <div class="col-auto d-none d-lg-block">
-    <img alt="" src="{{ update.image }}">
-  </div>
+    <div class="col-md-4">
+      <div class="card-img-top img-fluid">
+        <img alt="" src="{{ update.image }}">
+      </div>
+    </div>
 
+  </div>
 </div>

@@ -1,91 +1,81 @@
 <div class="container">
-  <div class="row g-5">
-    <div class="col-md-5 col-lg-4 order-md-last">
-      <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-white-50">Image Preview:</span>
-      </h4>
-      <div class="mb-3">
-        <hr>
-        <img class="card-img-bottom" [src]="imgPath.value" alt="">
+  <h4 class="mb-3">Create update</h4>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+
+      <div class="col-8">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title"
+               formControlName="titleInput">
+        <div class="invalid-feedback">
+          Please enter a title
+        </div>
+
+        <span class="bi-image-fill"></span>&nbsp;
+        <label for="image" class="form-label">Image Url</label>
+        <input type="text" class="form-control" id="image"
+               formControlName="imageUrl" #imgPath>
+        <div class="invalid-feedback">
+          Please enter a valid image link.
+        </div>
+
+        <label for="link" class="form-label">Details Url</label>
+        <input type="text" class="form-control" id="link"
+               formControlName="detailUrl">
+        <div class="invalid-feedback">
+          Please enter a valid url to the commit.
+        </div>
+      </div>
+
+      <div class="col-md-8 col-lg-4 order-md-last">
+        <div class="mb-3 text-center align-items-center">
+          <br>
+          <img class="card-img-bottom img-thumbnail rounded " [src]="imgPath.value" alt="">
+        </div>
       </div>
     </div>
 
-    <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">Create a new update</h4>
-      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="col-12">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" class="form-control" cols="10" rows="5" placeholder="Describe the update."
+                formControlName="descriptionInput"></textarea>
+    </div>
 
-        <div class="col-12">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title"
-                 formControlName="titleInput">
-          <div class="invalid-feedback">
-            Please enter a title
-          </div>
-        </div>
-
-        <div class="col-12">
-          <span class="bi-image-fill"></span>&nbsp;
-          <label for="image" class="form-label">Image Url</label>
-          <input type="text" class="form-control" id="image"
-                 formControlName="imageUrl" #imgPath>
-          <div class="invalid-feedback">
-            Please enter a valid image link.
-          </div>
-        </div>
-
-        <div class="col-12">
-          <label for="link" class="form-label">Details Url</label>
-          <input type="text" class="form-control" id="link"
-                 formControlName="detailUrl">
-          <div class="invalid-feedback">
-            Please enter a valid url to the commit.
-          </div>
-        </div>
-
-        <div class="col-12">
-          <label for="description" class="form-label">Description</label>
-          <textarea id="description" class="form-control" cols="10" rows="5" placeholder="Describe the update."
-                    formControlName="description"></textarea>
-        </div>
-
-        <hr>
-            <div class="accordion">
-              <div class="accordion-item">
-                <h4 class="accordion-header" id="headingOne">
-                  <button class="accordion-button text-bg-dark text-white-50 border-white" type="button"
-                          [ngClass]="quoteExpanded ? '': 'collapsed'"
-                          (click)="quoteExpanded = !quoteExpanded">
-                    Add a user quote
-                  </button>
-                </h4>
-                <div class="accordion-collapse" [ngClass]="quoteExpanded ? 'show' : 'collapse'">
-                  <div class="accordion-body bg-dark text-white border-white" formGroupName="userQuote">
-                    <div class="row g-3">
-                      <div class="col-sm-6">
-                        <span class="bi-person"></span>&nbsp;
-                        <label for="user" class="form-label">Username<span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="user" placeholder="JamSharp"
-                               formControlName="userName">
-                      </div>
-                      <div class="col-12">
-                        <label for="quote" class="form-label">Quote<span class="text-muted">(Optional)</span></label>
-                        <textarea id="quote" class="form-control" cols="10" rows="4" placeholder="A quote here!"
-                                  formControlName="quote"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+    <hr>
+    <div class="accordion">
+      <div class="accordion-item">
+        <h4 class="accordion-header" id="headingOne">
+          <button class="accordion-button text-bg-dark text-white-50 border-white" type="button"
+                  [ngClass]="quoteExpanded ? '': 'collapsed'"
+                  (click)="quoteExpanded = !quoteExpanded">
+            Add a user quote
+          </button>
+        </h4>
+        <div class="accordion-collapse" [ngClass]="quoteExpanded ? 'show' : 'collapse'">
+          <div class="accordion-body bg-dark text-white border-white" formGroupName="userQuote">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <span class="bi-person"></span>&nbsp;
+                <label for="user" class="form-label">Username<span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control" id="user" placeholder="JamSharp"
+                       formControlName="userName">
+              </div>
+              <div class="col-12">
+                <label for="quote" class="form-label">Quote<span class="text-muted">(Optional)</span></label>
+                <textarea id="quote" class="form-control" cols="10" rows="4" placeholder="A quote here!"
+                          formControlName="quote"></textarea>
               </div>
             </div>
-
-        <hr class="my-4">
-
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <button class="w-75 btn btn-outline-success" type="submit">Save</button>
-          <button class="w-25 btn btn-outline-danger m-lg-auto" type="button">Cancel</button>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
 
+    <hr class="my-4">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <button class="w-75 btn btn-outline-success" type="submit">Save</button>
+      <button class="w-25 btn btn-outline-danger m-lg-auto" type="button">Cancel</button>
+    </div>
+  </form>
 </div>
