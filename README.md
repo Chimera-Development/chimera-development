@@ -1,27 +1,43 @@
-# Chimera
+<img align="right" width="300" height="300" src="https://raw.githubusercontent.com/Chimera-Development/chimera-development.github.io/deploy/assets/chimera-logo.svg">
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+# Chimera Development [![Build](https://img.shields.io/github/actions/workflow/status/chimera-development/chimera-development.github.io/workflow.yml?branch=main)](https://github.com/Chimera-Development/chimera-development.github.io/actions) [![Apache License](https://img.shields.io/badge/License-Apache%20v.2.0-yellow.svg)](http://www.apache.org/licenses/LICENSE-2.0) [![Status](https://img.shields.io/website?down_color=crimson&down_message=down&logo=github&up_message=online&url=https%3A%2F%2Fchimera-development.github.io%2F)](https://chimera-development.github.io/)
 
-## Development server
+The Chimera Development Webpage. Deployed project files can be found under the [deploy branch](https://github.com/Chimera-Development/chimera-development.github.io/tree/deploy).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# About
+[![github](https://img.shields.io/badge/Client%20Repository-000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Chimera-Development/chimera-client)
+[![discord](https://img.shields.io/badge/discord-0A66C2?style=for-the-badge&logo=discord&logoColor=white)](https://www.linkedin.com/)
 
-## Code scaffolding
+This project aims to display the most recent updates and the development team behind the chimera client.
+More information about how to download the client and run it can be found under the FAQ section.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Contributing
 
-## Build
+To contribute please see the [issues tab](https://github.com/Chimera-Development/chimera-development.github.io/issues).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The section will list any open issues we currently need help with. Please note that development is ongoing and more features will be added in the future.
 
-## Running unit tests
+# Installing
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Install [Node.js](https://nodejs.org/) which includes [Node Package Manager](https://www.npmjs.com/get-npm)
 
-## Running end-to-end tests
+### Project Setup
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Clone the repository:
 
-## Further help
+```
+git clone https://github.com/Chimera-Development/chimera-development.github.io.git
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Run the application:
+
+```
+cd chimera-development.github.io.git
+npm install
+ng serve
+```
+
+# License
+
+This project is licensed under the [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
