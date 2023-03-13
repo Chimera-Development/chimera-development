@@ -4,6 +4,7 @@ import {Update} from "../model/update";
 import {UpdateService} from "./update.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   updates!: Update[]
   updateSubscription?: Subscription
+  userSubscription?: Subscription
+  isAuthenticated = false
 
   constructor(
     private updateService: UpdateService,
+    private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -27,6 +31,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.updateSubscription = this.updateService.itemsUpdated.subscribe(
       (updates:Update[]) => this.updates = updates
+    )
+
+    this.userSubscription = this.authService.userSet.subscribe(user =>
+      this.isAuthenticated = !!user
     )
   }
 
@@ -38,5 +46,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.updateSubscription?.unsubscribe()
+    this.userSubscription?.unsubscribe()
   }
 }

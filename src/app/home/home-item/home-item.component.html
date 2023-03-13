@@ -18,7 +18,7 @@
             <a href="{{ update.referenceLink }}" class="link-primary bi-info">See details...</a>
           </div>
 
-          <div class="col">
+          <div class="col" *ngIf="isAuthenticated">
             <div class="align-items-center btn-group">
               <button type="button" class="btn btn-sm btn-outline-secondary"
                       (click)="onUpdateSelected()">Edit</button>
@@ -33,7 +33,7 @@
 
     <div class="col-md-4">
       <div class="card-img-top">
-        <img class="rounded img-fluid" alt="" src="{{ update.image }}">
+        <img class="rounded-end img-fluid" alt="" src="{{ update.image }}">
       </div>
     </div>
 
