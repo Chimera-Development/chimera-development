@@ -15,18 +15,10 @@ jobs:
           node-version: 18
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
+      - name: Build & Deploy to branch
         env:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-
-      - name: Deploy
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: git@github.com:Chimera-Development/chimera-development.github.io.git
-          BRANCH: main
-          FOLDER: dist
-          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          npm install
+          npm run ng -- deploy --name="markm001" --email="markchrim@gmail.com"
