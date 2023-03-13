@@ -5,6 +5,7 @@ import {UpdateService} from "./update.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {AuthService} from "../auth/auth.service";
+import {DataStorageService} from "../data-storage.service";
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   userSubscription?: Subscription
   isAuthenticated = false
 
+  message: string | null = null
+
   constructor(
     private updateService: UpdateService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private storage: DataStorageService
+  ) { }
 
   ngOnInit(): void {
     this.title = environment.title
@@ -47,5 +52,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.updateSubscription?.unsubscribe()
     this.userSubscription?.unsubscribe()
+  }
+
+  onSaveAllUpdates() {
+    this.storage.saveUpdates().subscribe({
+      next: _ => this.message = '✔️ Changes have been saved successfully.',
+      error: err => this.message = err
+    })
+  }
+
+  onRetrieveAllUpdates() {
+    //TODO: Move into Resolver - on page load
+    this.storage.fetchUpdates().subscribe({
+      next: res => this.updates = res,
+      error: err => this.message = err
+    })
+  }
+
+  onPopupHandle() {
+    this.message = null
   }
 }

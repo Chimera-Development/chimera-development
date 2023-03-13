@@ -55,7 +55,7 @@ export class AuthService {
       || response.error.error.message === ('EMAIL_NOT_FOUND')) {
       message = 'The entered Email or Password is incorrect.'
     }
-    return throwError(() => message)
+    return throwError(() => '⛔ ' + message)
   }
 
   handleAutoLogin() {

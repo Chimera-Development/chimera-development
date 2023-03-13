@@ -9,3 +9,14 @@ export class Update {
     public developer?:string
   ) { }
 }
+
+
+export interface UpdateResponse {
+  title: string
+  date: Date
+  description: string
+  image: string
+  referenceLink:string
+  quote?:string
+  developer?:string
+}

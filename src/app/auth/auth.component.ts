@@ -24,8 +24,7 @@ export class AuthComponent implements OnInit {
 
    this.authService.login(loginForm.value.email, loginForm.value.password)
      .subscribe({
-       next: response => {
-         console.log(response)
+       next: _ => {
          this.router.navigate(['/home']).then()
        },
        error: err => this.errorMessage = err
