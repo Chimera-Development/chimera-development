@@ -19,9 +19,11 @@
         <button type="button" class="btn btn-outline-light"
                 (click)="onLoginClicked()"
                 *ngIf="!isAuthenticated">Login</button>
-        <button type="button" class="btn btn-outline-light"
-                (click)="onLogoutClicked()"
-                *ngIf="isAuthenticated">Logout</button>
+        <div *ngIf="isAuthenticated">
+          <span>{{ userName }}</span> |
+          <button type="button" class="btn btn-outline-light"
+                  (click)="onLogoutClicked()">Logout</button>
+        </div>
       </div>
 
     </div>

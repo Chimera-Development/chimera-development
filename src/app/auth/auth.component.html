@@ -1,7 +1,7 @@
 <app-alert
-  *ngIf="errorMessage"
-  [message]="errorMessage"
-  (alertClosed)="onErrorHandle()"></app-alert>
+  *ngIf="displayMessage"
+  [message]="displayMessage"
+  (alertClosed)="onMessagePopupHandle()"></app-alert>
 
 <div class="row text-center">
   <div>
@@ -9,7 +9,10 @@
   </div>
 
   <form (ngSubmit)="onSubmitForm(loginForm)" #loginForm="ngForm">
-    <h4 class="fw-normal">Login</h4>
+    <h4 class="fw-normal"
+        [textContent]="isRegister ? 'Create an Account' : 'Login'"
+    >Login</h4>
+
     <hr style="color: lightgray">
     <div class="form-floating">
       <input type="email" class="form-control bg-dark border-dark text-white"
@@ -27,6 +30,13 @@
 
     <button type="submit"
             class="w-100 btn btn-lg btn-secondary bg-dark border-white"
+            [textContent]="isRegister ? 'Create account' : 'Login'"
             [disabled]="!loginForm.valid">Login</button>
   </form>
+</div>
+
+<div class="col-md-auto text-end">
+    <button type="button" class="btn" style="cursor: default"
+    (click)="onRegisterClicked()"
+    >Register</button>
 </div>

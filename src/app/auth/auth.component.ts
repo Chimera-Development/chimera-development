@@ -11,7 +11,10 @@ import {Router} from "@angular/router";
 })
 export class AuthComponent implements OnInit {
   title: string = 'Chimera Project'
-  errorMessage: string | null = null
+  displayMessage: string | null = null
+
+  isRegister = false
+  navigationTimer:any
 
   constructor(private authService:AuthService, private router:Router) { }
 
@@ -22,18 +25,42 @@ export class AuthComponent implements OnInit {
   onSubmitForm(loginForm: NgForm) {
     if(!loginForm.valid) return;
 
-   this.authService.login(loginForm.value.email, loginForm.value.password)
-     .subscribe({
-       next: _ => {
-         this.router.navigate(['/home']).then()
-       },
-       error: err => this.errorMessage = err
-     })
+    if(this.isRegister) {
+      this.handleRegister(loginForm)
+    } else {
+      this.handleLogin(loginForm)
+    }
 
     loginForm.reset()
   }
 
-  onErrorHandle() {
-    this.errorMessage = null
+  handleLogin(loginForm: NgForm) {
+    this.authService.login(loginForm.value.email, loginForm.value.password)
+      .subscribe({
+        next: _ => {
+          this.router.navigate(['/home']).then()
+        },
+        error: err => this.displayMessage = err
+      })
+  }
+  handleRegister(registerForm: NgForm) {
+    this.authService.signUp(registerForm.value.email, registerForm.value.password)
+      .subscribe({
+        next: _ => {
+          this.displayMessage = '✔️ Successfully registered.'
+          this.navigationTimer = setTimeout( () => {
+            this.router.navigate(['/home']).then(() => this.navigationTimer.unsubscribe)
+          },1500)
+        },
+        error: err => this.displayMessage = err
+      })
+  }
+
+  onMessagePopupHandle() {
+    this.displayMessage = null
+  }
+
+  onRegisterClicked() {
+    this.isRegister = true
   }
 }

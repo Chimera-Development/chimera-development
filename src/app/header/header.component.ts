@@ -12,7 +12,9 @@ import {Subscription} from "rxjs";
 export class HeaderComponent implements OnInit, OnDestroy{
   title!: string
   isAuthenticated = false
+  userName:string | undefined
   userSubscription?:Subscription
+
   constructor(
     private router: Router,
     private authService:AuthService
@@ -21,9 +23,12 @@ export class HeaderComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.title = environment.title
 
-    this.userSubscription = this.authService.userSet.subscribe(user =>
+    this.userSubscription = this.authService.userSet.subscribe(user => {
       this.isAuthenticated = !!user
-    )
+      if(this.isAuthenticated) {
+        this.userName = user!.email
+      }
+    })
   }
 
   onLoginClicked() {

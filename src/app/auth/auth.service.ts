@@ -17,6 +17,25 @@ export class AuthService {
   ) {
   }
 
+  signUp(email: string, password: string): Observable<AuthResponse> {
+    return this.client.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.FIREBASE_API_KEY,
+      {
+        email,
+        password,
+        returnSecureToken: true
+      }).pipe(
+      catchError(this.handleErrorResponse),
+      tap({
+        next: response => this.handleLogin(
+          response.email,
+          response.localId,
+          response.idToken,
+          +response.expiresIn
+        )
+      })
+    )
+  }
+
   login(email: string, password: string): Observable<AuthResponse> {
     return this.client.post<AuthResponse>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.FIREBASE_API_KEY,
       {
@@ -51,18 +70,22 @@ export class AuthService {
 
     if (!(response.error || response.error.error)) return throwError(() => message)
 
-    if (response.error.error.message === ('INVALID_PASSWORD')
-      || response.error.error.message === ('EMAIL_NOT_FOUND')) {
-      message = 'The entered Email or Password is incorrect.'
+    switch (response.error.error.message) {
+      case 'EMAIL_EXISTS':
+        message = 'The email already exists.'
+        break
+      case 'INVALID_PASSWORD':
+      case 'EMAIL_NOT_FOUND':
+        message = 'The email or password is incorrect.'
     }
     return throwError(() => '⛔ ' + message)
   }
 
   handleAutoLogin() {
-    const userData:{
-      email:string,
-      userId:string,
-      _token:string,
+    const userData: {
+      email: string,
+      userId: string,
+      _token: string,
       _expiry: string
     } = JSON.parse(localStorage.getItem('userData')!);
 
@@ -75,7 +98,7 @@ export class AuthService {
       new Date(userData._expiry)
     )
 
-    if(loadedUser.token) {
+    if (loadedUser.token) {
       this.userSet.next(loadedUser)
       const expiryDuration = new Date(userData._expiry).getTime() - new Date().getTime()
       this.handleAutoLogout(expiryDuration)
@@ -116,8 +139,8 @@ class User {
   ) {
   }
 
-  get token():string | null {
-    if(!this._expiry || new Date() > this._expiry) {
+  get token(): string | null {
+    if (!this._expiry || new Date() > this._expiry) {
       return null
     }
     return this._token
