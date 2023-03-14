@@ -61,14 +61,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
 
-  onRetrieveAllUpdates() {
-    //TODO: Move into Resolver - on page load
-    this.storage.fetchUpdates().subscribe({
-      next: res => this.updates = res,
-      error: err => this.message = err
-    })
-  }
-
   onPopupHandle() {
     this.message = null
   }

@@ -9,10 +9,14 @@ import {ErrorComponent} from "./error/error.component";
 import {HomeEditComponent} from "./home/home-edit/home-edit.component";
 
 import * as AuthGuard from "./auth/auth-guard.service"
+import * as Resolver from "./app.resolver"
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
-  {path:'home', component:HomeComponent, canActivateChild:[AuthGuard.canActivateChild] ,children: [
+  {path:'home', component:HomeComponent,
+    canActivateChild:[AuthGuard.canActivateChild],
+    resolve:[Resolver.updateResolver],
+    children: [
       {path: 'new', component: HomeEditComponent},
       {path: ':id', component: HomeEditComponent}
     ]},

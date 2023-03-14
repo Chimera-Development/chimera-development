@@ -21,19 +21,17 @@
           <button class="btn btn-outline-info w-25"
                   (click)="onNewUpdate()">New update</button>&nbsp;
           <button class="btn btn-outline-info w-25"
-                  (click)="onSaveAllUpdates()">Save Updates</button>&nbsp;
-          <button class="btn btn-outline-info w-25"
-                  (click)="onRetrieveAllUpdates()">Load Updates</button>
+                  (click)="onSaveAllUpdates()">Save changes</button>
         </div>
         <hr class="w-25">
         <router-outlet></router-outlet>
       </div>
 
       <div class="list-group mx-0">
-        <div class="col album py-4">
+        <div class="col album">
           <div class="container">
             <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
-                <app-home-item
+                <app-home-item class="py-2"
                   *ngFor="let update of updates; let i = index;"
                   [updateCard]="update" [itemId]="i"></app-home-item>
             </div>

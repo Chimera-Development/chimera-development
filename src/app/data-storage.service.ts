@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {UpdateService} from "./home/update.service";
-import {catchError, map, Observable, throwError} from "rxjs";
+import {catchError, map, Observable, tap, throwError} from "rxjs";
 import {Update, UpdateResponse} from "./model/update";
 
 @Injectable({
@@ -26,6 +26,7 @@ export class DataStorageService {
             }
           })
       }),
+      tap(updates => this.updateService.setUpdates(updates)),
       catchError(this.handleLoadingErrorResponse)
     )
   }
@@ -56,7 +57,7 @@ export class DataStorageService {
 
     if(response.status != null) {
       message = '⚠️ ' + response.status + ': ' + response.statusText
-        + 'Unable to retrieve data.'
+        + ' Unable to retrieve data.'
     }
 
     return throwError(() => message)
