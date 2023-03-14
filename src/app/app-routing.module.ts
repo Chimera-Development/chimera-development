@@ -23,7 +23,7 @@ const appRoutes:Routes = [
   {path:'faq', component:FaqComponent},
   {path:'auth', component:AuthComponent},
   {path:'about', component:AboutComponent},
-  {path:'error', component:ErrorComponent, data:{ message: '404 | not found'} },
+  {path:'error', component:ErrorComponent},
   { path: '**', redirectTo: '/error', pathMatch: 'full' }
 ]
 

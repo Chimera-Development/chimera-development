@@ -10,10 +10,11 @@ import {AboutComponent} from './about/about.component';
 import {FaqComponent} from './faq/faq.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ErrorComponent} from './error/error.component';
 import {AlertComponent} from './shared/alert/alert.component';
 import {HomeEditComponent} from './home/home-edit/home-edit.component';
+import {AuthInterceptor} from "./auth/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,11 @@ import {HomeEditComponent} from './home/home-edit/home-edit.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
