@@ -13,33 +13,30 @@
     </div>
   </div>
 
-  <div>
-    <div class="justify-content-center">
-
-      <div class="list-group mx-0 col-md-8" *ngIf="isAuthenticated">
-        <div class="row">
-          <button class="btn btn-outline-info w-25"
-                  (click)="onNewUpdate()">New update</button>&nbsp;
-          <button class="btn btn-outline-info w-25"
-                  (click)="onSaveAllUpdates()">Save changes</button>
-        </div>
-        <hr class="w-25">
-        <router-outlet></router-outlet>
+  <div class="container col">
+      <div class="row" *ngIf="isAuthenticated">
+        <button class="btn btn-outline-info w-25"
+                (click)="onNewUpdate()">New update</button>&nbsp;
+        <button class="btn btn-outline-info w-25"
+                (click)="onSaveAllUpdates()">Save changes</button>
       </div>
 
-      <div class="list-group mx-0">
-        <div class="col album">
-          <div class="container">
-            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2">
-                <app-home-item class="py-2"
-                  *ngFor="let update of updates; let i = index;"
-                  [updateCard]="update" [itemId]="i"></app-home-item>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="row py-4">
+      <hr class="w-50">
     </div>
+
+    <div class="row justify-content-start">
+      <div class="w-50" [hidden]="!outlet.isActivated">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+
+      <app-home-item
+        class="p-2 w-50"
+        *ngFor="let update of updates; let i = index;"
+        [updateCard]="update" [itemId]="i">
+      </app-home-item>
+    </div>
+
   </div>
 
 </div>

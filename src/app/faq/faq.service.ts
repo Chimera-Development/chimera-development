@@ -52,4 +52,14 @@ export class FaqService {
     this.faqAnswers.splice(answerIndex, 1)
     this.faqUpdated.next(this.faqAnswers.slice())
   }
+
+  updateAnswer(index: number, answer: FaqAnswer) {
+    this.faqAnswers[index] = answer
+    this.faqUpdated.next(this.faqAnswers.slice())
+  }
+
+  addAnswer(answer: FaqAnswer) {
+    this.faqAnswers.push(answer)
+    this.faqUpdated.next(this.faqAnswers.slice())
+  }
 }

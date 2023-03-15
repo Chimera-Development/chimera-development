@@ -15,7 +15,7 @@
     <div class="col-sm-11">
       <h2>{{ faqAnswer.title }}</h2>
       <p>{{ faqAnswer.answer }}</p>
-      <ul class="icon-list" *ngIf="faqAnswer.link != null">
+      <ul class="icon-list" *ngIf="faqAnswer.link != '' && faqAnswer.link != null">
         <li class="nav-link bi bi-arrow-right-circle-fill">&nbsp;
           <a [href]="faqAnswer.link">{{ faqAnswer.linkDisplay }}</a>
         </li>

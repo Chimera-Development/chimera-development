@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FaqService} from "../faq.service";
-import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FaqAnswer} from "../../model/faq-answer";
 
 @Component({
   selector: 'app-faq-edit',
@@ -38,7 +39,7 @@ export class FaqEditComponent implements OnInit {
     if(this.isEdit) {
       const retrievedAnswer = this.faqService.getAnswerById(this.answerId);
       question = retrievedAnswer.title
-      answer = retrievedAnswer.title
+      answer = retrievedAnswer.answer
       if(retrievedAnswer.link != null) {
         display = retrievedAnswer.linkDisplay!
         link = retrievedAnswer.link!
@@ -60,6 +61,21 @@ export class FaqEditComponent implements OnInit {
   }
 
   onFormSubmit() {
-    console.log(this.faqForm.value)
+    const answer = new FaqAnswer(
+      this.faqForm.value.question,
+      this.faqForm.value.answer,
+      this.faqForm.value.optional.display,
+      this.faqForm.value.optional.link
+    )
+
+
+    if(this.isEdit) {
+      this.faqService.updateAnswer(this.answerId, answer)
+    } else {
+      this.faqService.addAnswer(answer)
+    }
+
+    this.isEdit = false
+    this.onCancelClicked()
   }
 }
