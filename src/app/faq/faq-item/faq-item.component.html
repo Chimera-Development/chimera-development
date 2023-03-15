@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="d-flex flex-row-reverse">
+    <div class="col-sm-1">
+      <div class="align-items-center">
+        <button class="btn btn-outline-danger btn-sm border-0 bi-x"
+          (click)="onDeleteClicked()"></button>
+        <button class="btn btn-outline-danger btn-sm border-0 bi-pencil"
+          (click)="onEditClicked()"></button>
+        <button
+          class="btn btn-outline-danger btn-sm border-0  bi-arrow-up-circle"
+          (click)="onShiftUpClicked()"></button>
+      </div>
+    </div>
+
+    <div class="col-sm-11">
+      <h2>{{ faqAnswer.title }}</h2>
+      <p>{{ faqAnswer.answer }}</p>
+      <ul class="icon-list" *ngIf="faqAnswer.link != null">
+        <li class="nav-link bi bi-arrow-right-circle-fill">&nbsp;
+          <a [href]="faqAnswer.link">{{ faqAnswer.linkDisplay }}</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -10,6 +10,7 @@ import {HomeEditComponent} from "./home/home-edit/home-edit.component";
 
 import * as AuthGuard from "./auth/auth-guard.service"
 import * as Resolver from "./app.resolver"
+import {FaqEditComponent} from "./faq/faq-edit/faq-edit.component";
 
 const appRoutes:Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
@@ -20,7 +21,11 @@ const appRoutes:Routes = [
       {path: 'new', component: HomeEditComponent},
       {path: ':id', component: HomeEditComponent}
     ]},
-  {path:'faq', component:FaqComponent},
+  {path:'faq', component:FaqComponent,
+    children: [
+      {path: 'new', component: FaqEditComponent},
+      {path: ':id', component: FaqEditComponent}
+    ]},
   {path:'auth', component:AuthComponent},
   {path:'about', component:AboutComponent},
   {path:'error', component:ErrorComponent},

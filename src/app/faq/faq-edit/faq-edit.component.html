@@ -1,0 +1,46 @@
+<div class="container">
+  <form [formGroup]="faqForm" (ngSubmit)="onFormSubmit()">
+    <div class="row">
+      <h4 class="col-md-5 mb-3">Edit Question</h4>
+      <div class="col-md-7">
+        <div class="input-group">
+          <button class="form-control btn btn-outline-success" type="submit">Save</button>
+          <button class="w-auto btn btn-outline-danger" type="button"
+            (click)="onCancelClicked()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row gy-3">
+      <div class="col">
+        <label for="question" class="form-label">Question</label>
+        <input type="text" class="form-control" id="question" formControlName="question">
+      </div>
+    </div>
+
+    <div class="row gy-3">
+      <div class="col">
+        <label for="answer" class="form-label">Answer</label>
+        <textarea class="form-control" id="answer" rows="3" formControlName="answer"></textarea>
+      </div>
+    </div>
+
+
+    <div class="row gy-3" formGroupName="optional">
+      <div class="col-md-6">
+        <label for="display" class="form-label">Display Text</label>&nbsp;
+        <small class="text-muted">(optional)</small>
+        <input type="text" class="form-control" id="display" formControlName="display">
+      </div>
+
+      <div class="col-md-6">
+        <label for="link" class="form-label">Link</label>&nbsp;
+        <small class="text-muted">(optional)</small>
+        <input type="text" class="form-control" id="link" formControlName="link">
+      </div>
+    </div>
+
+    <hr class="my-4">
+  </form>
+</div>

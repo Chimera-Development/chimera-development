@@ -13,28 +13,15 @@
        class="btn btn-primary btn-lg px-4">Download Client Jar</a>
   </div>
 
-  <hr class="col-3 col-md-2 mb-5">
+  <hr class="w-25 mb-5">
 
   <div class="row g-5">
-    <div class="col-md-6">
-      <h2>What is Topological Sorting</h2>
-      <p>Chimera Client utilizes topological sorting. Imagine not having topological sorting.
-        Topological sorting is a technique that guarantees that the utility modules and the game events are executed in a correct and consistent order that follows their dependencies and prevents conflicts or errors. It also optimizes the performance and efficiency of the Chimera Client by eliminating unnecessary or redundant executions.</p>
-      <ul class="icon-list">
-        <li class="nav-link bi bi-arrow-right-circle-fill">
-          <a href="https://de.wikipedia.org/wiki/Topologische_Sortierung">Wikipedia - Topological sorting</a>
-        </li>
-      </ul>
+    <div class="col-md-6" [hidden]="!outlet.isActivated">
+      <router-outlet #outlet="outlet"></router-outlet>
     </div>
 
-    <div class="col-md-6">
-      <h2>What separates Chimera from just another client?</h2>
-      <p>Glad you asked.  Topological sorting is a proven and elegant technique that can improve the functionality and reliability of your minecraft utility client.</p>
-      <ul class="icon-list">
-        <li class="nav-link bi bi-arrow-right-circle-fill">
-          <a href="https://de.wikipedia.org/wiki/Topologische_Sortierung">Learn more about topological sorting</a>
-        </li>
-      </ul>
+    <div class="col-md-6" *ngFor="let answer of faqAnswers; let i = index">
+      <app-faq-item [faqAnswer]="answer" [answerIndex]="i"></app-faq-item>
     </div>
   </div>
 

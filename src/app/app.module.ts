@@ -15,6 +15,8 @@ import {ErrorComponent} from './error/error.component';
 import {AlertComponent} from './shared/alert/alert.component';
 import {HomeEditComponent} from './home/home-edit/home-edit.component';
 import {AuthInterceptor} from "./auth/auth.interceptor";
+import { FaqItemComponent } from './faq/faq-item/faq-item.component';
+import { FaqEditComponent } from './faq/faq-edit/faq-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {AuthInterceptor} from "./auth/auth.interceptor";
     FaqComponent,
     ErrorComponent,
     AlertComponent,
-    HomeEditComponent
+    HomeEditComponent,
+    FaqItemComponent,
+    FaqEditComponent
   ],
   imports: [
     BrowserModule,
