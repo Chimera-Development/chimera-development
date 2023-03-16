@@ -1,36 +1,24 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
-import {FaqComponent} from "./faq/faq.component";
-import {AboutComponent} from "./about/about.component";
-import {HomeComponent} from "./home/home.component";
-import {AuthComponent} from "./auth/auth.component";
-import {ErrorComponent} from "./error/error.component";
-import {HomeEditComponent} from "./home/home-edit/home-edit.component";
 
-import * as AuthGuard from "./auth/auth-guard.service"
-import * as Resolver from "./app.resolver"
-import {FaqEditComponent} from "./faq/faq-edit/faq-edit.component";
-
-const appRoutes:Routes = [
+const moduleRoutes: Routes = [
   {path:'', redirectTo:'/home', pathMatch:'full'},
-  {path:'home', component:HomeComponent,
-    canActivateChild:[AuthGuard.canActivateChild],
-    resolve:[Resolver.updateResolver],
-    children: [
-      {path: 'new', component: HomeEditComponent},
-      {path: ':id', component: HomeEditComponent}
-    ]},
-  {path:'faq', component:FaqComponent,
-    canActivateChild:[AuthGuard.canActivateChild],
-    resolve: [Resolver.faqAnswerResolver],
-    children: [
-      {path: 'new', component: FaqEditComponent},
-      {path: ':id', component: FaqEditComponent},
-    ]},
-  {path:'auth', component:AuthComponent},
-  {path:'about', component:AboutComponent},
-  {path:'error', component:ErrorComponent},
+  {path:'home', loadChildren: ()=> import('./home/home.module')
+      .then(module => module.HomeModule)
+  },
+  {path:'faq', loadChildren: ()=> import('./faq/faq.module')
+      .then(module => module.FaqModule)
+  },
+  {path:'auth', loadChildren: ()=> import('./auth/auth.module')
+      .then(module => module.AuthModule)
+  },
+  {path:'error', loadChildren: ()=> import('./error/error.module')
+      .then(module => module.ErrorModule)
+  },
+  {path:'about', loadChildren: ()=> import('./about/about.module')
+      .then(module => module.AboutModule)
+  },
   { path: '**', redirectTo: '/error', pathMatch: 'full' }
 ]
 
@@ -38,7 +26,9 @@ const appRoutes:Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes, {useHash: true})
+    RouterModule.forRoot(moduleRoutes,
+      {useHash: true}
+    )
   ],
   exports: [
     RouterModule
