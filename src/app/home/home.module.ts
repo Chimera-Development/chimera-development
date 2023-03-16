@@ -1,12 +1,19 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {HomeRoutingModule} from "./home-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {SharedModule} from "../shared/shared.module";
+import {HomeComponent} from "./home.component";
+import {HomeItemComponent} from "./home-item/home-item.component";
+import {HomeEditComponent} from "./home-edit/home-edit.component";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HomeComponent,
+    HomeItemComponent,
+    HomeEditComponent,
+  ],
   imports: [
-    CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     HomeRoutingModule
   ]

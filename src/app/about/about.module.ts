@@ -6,7 +6,9 @@ import {AboutComponent} from "./about.component";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AboutComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
