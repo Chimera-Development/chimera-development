@@ -20,7 +20,6 @@ export class UpdateService {
 
   updateUpdate(id: number, update: Update) {
     this.updates[id] = update
-
     this.itemsUpdated.next(this.updates.slice())
   }
 
@@ -32,9 +31,6 @@ export class UpdateService {
 
   deleteUpdate(id: number) {
     this.updates.splice(id, 1)
-
-    console.log(this.updates.slice())
-
     this.itemsUpdated.next(this.updates.slice())
   }
 

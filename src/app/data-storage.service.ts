@@ -15,6 +15,11 @@ export class DataStorageService {
     private updateService: UpdateService,
     private faqService: FaqService) { }
 
+  /**
+   * For fetching Updates from Firebase updates-Endpoint
+   * UpdateResponse[] -> Update[] (null fields -> '') || Errormessage
+   * mapped Update[] set in UpdateService -> output to Component via Subject
+   */
   fetchUpdates(): Observable<Update[]> {
     return this.client.get<UpdateResponse[]>(
       'https://chimera-client-default-rtdb.europe-west1.firebasedatabase.app/updates.json'
@@ -30,7 +35,7 @@ export class DataStorageService {
           })
       }),
       tap(updates => this.updateService.setUpdates(updates)),
-      catchError(this.handleLoadingErrorResponse)
+      catchError(this.handleLoadingErrorResponse<Update[]>)
     )
   }
 
@@ -41,31 +46,15 @@ export class DataStorageService {
       'https://chimera-client-default-rtdb.europe-west1.firebasedatabase.app/updates.json',
       updates
     ).pipe(
-      catchError(this.handleSavingErrorResponse)
+      catchError(this.handleSavingErrorResponse<UpdateResponse[]>)
     )
   }
 
-  private handleSavingErrorResponse(response:HttpErrorResponse):Observable<UpdateResponse[]> {
-    let message = 'Failed to complete the request.'
-
-    if(response.status != null) {
-      message = '⚠️ ' + response.status + ': ' + response.statusText
-    }
-
-    return throwError(() => message)
-  }
-
-  private handleLoadingErrorResponse(response:HttpErrorResponse) {
-    let message = 'Failed to retrieve response data.'
-
-    if(response.status != null) {
-      message = '⚠️ ' + response.status + ': ' + response.statusText
-        + ' Unable to retrieve data.'
-    }
-
-    return throwError(() => message)
-  }
-
+  /**
+   * For fetching FaqAnswers from Firebase faq-Endpoint
+   * FaqAnswerResponse[] -> FaqAnswer[] (null -> '') || Errormessage
+   * mapped FaqAnswer[] set in FaqService -> output to Component via Subject
+   */
   fetchAnswers() {
     return this.client.get<FaqAnswerResponse[]>(
       'https://chimera-client-default-rtdb.europe-west1.firebasedatabase.app/faq.json'
@@ -81,19 +70,40 @@ export class DataStorageService {
           })
       }),
       tap(answers => this.faqService.setAnswers(answers)),
-      catchError(this.handleLoadingErrorResponse)
+      catchError(this.handleLoadingErrorResponse<FaqAnswer[]>)
     )
   }
 
-  saveAnswers(): Observable<UpdateResponse[]> {
+  saveAnswers(): Observable<FaqAnswerResponse[]> {
     const answers = this.faqService.getAnswers()
 
-    return this.client.put<UpdateResponse[]>(
+    return this.client.put<FaqAnswerResponse[]>(
       'https://chimera-client-default-rtdb.europe-west1.firebasedatabase.app/faq.json',
       answers
     ).pipe(
-      catchError(this.handleSavingErrorResponse)
+      catchError(this.handleSavingErrorResponse<FaqAnswerResponse[]>)
     )
+  }
+
+  private handleSavingErrorResponse<T>(response:HttpErrorResponse):Observable<T> {
+    let message = 'Failed to complete the request.'
+
+    if(response.status != null) {
+      message = '⚠️ ' + response.status + ': ' + response.statusText
+    }
+
+    return throwError(() => message)
+  }
+
+  private handleLoadingErrorResponse<T>(response:HttpErrorResponse):Observable<T> {
+    let message = 'Failed to retrieve response data.'
+
+    if(response.status != null) {
+      message = '⚠️ ' + response.status + ': ' + response.statusText
+        + ' Unable to retrieve data.'
+    }
+
+    return throwError(() => message)
   }
 }
 
