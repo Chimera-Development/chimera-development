@@ -7,24 +7,24 @@ import {Subject} from "rxjs";
 })
 export class FaqService {
   faqUpdated = new Subject<FaqAnswer[]>()
-  faqAnswers: FaqAnswer[] = [
-    new FaqAnswer(
-      'What is Topological Sorting?',
-      'Topological sorting is a technique that guarantees that the utility modules and the game events are executed in a correct and consistent order that follows their dependencies and prevents conflicts or errors. It also optimizes the performance and efficiency of the Chimera Client by eliminating unnecessary or redundant executions',
-      'Wikipedia - Topological sorting',
-      'https://de.wikipedia.org/wiki/Topologische_Sortierung'
-    ),
-    new FaqAnswer(
-      'What separates Chimera from just another client?',
-      'Glad you asked.  Topological sorting is a proven and elegant technique that can improve the functionality and reliability of your minecraft utility client.',
-      'Learn more about topological sorting',
-      'https://de.wikipedia.org/wiki/Topologische_Sortierung'
-    ),
-    new FaqAnswer(
-      'What separates Chimera from just another client?',
-      'Glad you asked.  Topological sorting is a proven and elegant technique that can improve the functionality and reliability of your minecraft utility client.'
-    )
-  ]
+  faqAnswers: FaqAnswer[] = []
+  //   new FaqAnswer(
+  //     'What is Topological Sorting?',
+  //     'Topological sorting is a technique that guarantees that the utility modules and the game events are executed in a correct and consistent order that follows their dependencies and prevents conflicts or errors. It also optimizes the performance and efficiency of the Chimera Client by eliminating unnecessary or redundant executions',
+  //     'Wikipedia - Topological sorting',
+  //     'https://de.wikipedia.org/wiki/Topologische_Sortierung'
+  //   ),
+  //   new FaqAnswer(
+  //     'What separates Chimera from just another client?',
+  //     'Glad you asked.  Topological sorting is a proven and elegant technique that can improve the functionality and reliability of your minecraft utility client.',
+  //     'Learn more about topological sorting',
+  //     'https://de.wikipedia.org/wiki/Topologische_Sortierung'
+  //   ),
+  //   new FaqAnswer(
+  //     'What separates Chimera from just another client?',
+  //     'Glad you asked.  Topological sorting is a proven and elegant technique that can improve the functionality and reliability of your minecraft utility client.'
+  //   )
+  // ]
 
   constructor() { }
 
@@ -60,6 +60,11 @@ export class FaqService {
 
   addAnswer(answer: FaqAnswer) {
     this.faqAnswers.push(answer)
+    this.faqUpdated.next(this.faqAnswers.slice())
+  }
+
+  setAnswers(answers: FaqAnswer[]) {
+    this.faqAnswers = answers
     this.faqUpdated.next(this.faqAnswers.slice())
   }
 }

@@ -1,3 +1,8 @@
+<app-alert
+  *ngIf="message"
+  [message]="message"
+  (alertClosed)="onPopupHandle()"></app-alert>
+
 <div class="col">
   <h1>How to install the client?</h1>
   <ul class="fs-5 col-md-8">
@@ -15,7 +20,16 @@
 
   <hr class="w-25 mb-5">
 
+
   <div class="row g-5">
+
+    <div class="row w-100 pt-4" *ngIf="isAuthenticated">
+      <button class="bi-plus-circle g-0 btn-lg btn btn-outline-primary w-50"
+              (click)="onAddQuestion()"> New Question</button>&nbsp;
+      <button class="bi-terminal-plus g-0 btn-lg btn btn-outline-success w-25"
+              (click)="onSaveChanges()"> Save Changes</button>
+    </div>
+
     <div class="col-md-6" [hidden]="!outlet.isActivated">
       <router-outlet #outlet="outlet"></router-outlet>
     </div>

@@ -3,6 +3,8 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {UpdateService} from "./home/update.service";
 import {catchError, map, Observable, tap, throwError} from "rxjs";
 import {Update, UpdateResponse} from "./model/update";
+import {FaqAnswer, FaqAnswerResponse} from "./model/faq-answer";
+import {FaqService} from "./faq/faq.service";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,8 @@ import {Update, UpdateResponse} from "./model/update";
 export class DataStorageService {
   constructor(
     private client: HttpClient,
-    private updateService: UpdateService) { }
+    private updateService: UpdateService,
+    private faqService: FaqService) { }
 
   fetchUpdates(): Observable<Update[]> {
     return this.client.get<UpdateResponse[]>(
@@ -52,7 +55,7 @@ export class DataStorageService {
     return throwError(() => message)
   }
 
-  private handleLoadingErrorResponse(response:HttpErrorResponse):Observable<Update[]> {
+  private handleLoadingErrorResponse(response:HttpErrorResponse) {
     let message = 'Failed to retrieve response data.'
 
     if(response.status != null) {
@@ -61,6 +64,36 @@ export class DataStorageService {
     }
 
     return throwError(() => message)
+  }
+
+  fetchAnswers() {
+    return this.client.get<FaqAnswerResponse[]>(
+      'https://chimera-client-default-rtdb.europe-west1.firebasedatabase.app/faq.json'
+    ).pipe(
+      map((answer) => {
+        return <FaqAnswer[]>answer.map(
+          (answer) => {
+            return {
+              ...answer,
+              linkDisplay: answer.linkDisplay ? answer.linkDisplay : '',
+              link: answer.link ? answer.link : ''
+            }
+          })
+      }),
+      tap(answers => this.faqService.setAnswers(answers)),
+      catchError(this.handleLoadingErrorResponse)
+    )
+  }
+
+  saveAnswers(): Observable<UpdateResponse[]> {
+    const answers = this.faqService.getAnswers()
+
+    return this.client.put<UpdateResponse[]>(
+      'https://chimera-client-default-rtdb.europe-west1.firebasedatabase.app/faq.json',
+      answers
+    ).pipe(
+      catchError(this.handleSavingErrorResponse)
+    )
   }
 }
 

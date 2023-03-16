@@ -22,9 +22,11 @@ const appRoutes:Routes = [
       {path: ':id', component: HomeEditComponent}
     ]},
   {path:'faq', component:FaqComponent,
+    canActivateChild:[AuthGuard.canActivateChild],
+    resolve: [Resolver.faqAnswerResolver],
     children: [
       {path: 'new', component: FaqEditComponent},
-      {path: ':id', component: FaqEditComponent}
+      {path: ':id', component: FaqEditComponent},
     ]},
   {path:'auth', component:AuthComponent},
   {path:'about', component:AboutComponent},

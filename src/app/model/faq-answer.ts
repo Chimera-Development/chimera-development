@@ -6,3 +6,10 @@ export class FaqAnswer {
     public link?: string
   ){ }
 }
+
+export interface FaqAnswerResponse {
+  title:string
+  answer:string
+  linkDisplay?:string
+  link?:string
+}

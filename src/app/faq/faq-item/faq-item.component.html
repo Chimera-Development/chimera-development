@@ -1,7 +1,7 @@
 <div class="container">
   <div class="d-flex flex-row-reverse">
     <div class="col-sm-1">
-      <div class="align-items-center">
+      <div class="align-items-center" *ngIf="isAuthenticated">
         <button class="btn btn-outline-danger btn-sm border-0 bi-x"
           (click)="onDeleteClicked()"></button>
         <button class="btn btn-outline-danger btn-sm border-0 bi-pencil"
