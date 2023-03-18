@@ -24,10 +24,10 @@
   <div class="row g-5">
 
     <div class="row w-100 pt-4" *ngIf="isAuthenticated">
-      <button class="bi-plus-circle g-0 btn-lg btn btn-outline-primary w-50"
-              (click)="onAddQuestion()"> New Question</button>&nbsp;
-      <button class="bi-terminal-plus g-0 btn-lg btn btn-outline-success w-25"
-              (click)="onSaveChanges()"> Save Changes</button>
+      <div class="container px-4">
+        <button class="bi-plus-circle g-0 btn-lg btn btn-outline-primary w-25"
+                (click)="onAddQuestion()"> New Question</button>
+      </div>
     </div>
 
     <div class="col-md-6" [hidden]="!outlet.isActivated">
