@@ -12,6 +12,7 @@ import {Subscription} from "rxjs";
 export class FaqItemComponent implements OnInit, OnDestroy {
   @Input('answerIndex') answerIndex!: number
   @Input('faqAnswer') faqAnswer!: FaqAnswer
+
   isAuthenticated: boolean = false
   userSubscription?:Subscription
 

@@ -3,6 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {FaqComponent} from "./faq.component";
 import * as AuthGuard from "../auth/auth-guard.service";
 import * as Resolver from "../app.resolver";
+import * as DeactivateGuard from "../auth/can-deactivate-guard.service"
 import {FaqEditComponent} from "./faq-edit/faq-edit.component";
 
 const routes: Routes = [
@@ -11,8 +12,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard.canActivateChild],
     resolve: [Resolver.faqAnswerResolver],
     children: [
-      {path: 'new', component: FaqEditComponent},
-      {path: ':id', component: FaqEditComponent},
+      {path: 'new', component: FaqEditComponent, canDeactivate: [DeactivateGuard.canDeactivateFormGuard]},
+      {path: ':id', component: FaqEditComponent, canDeactivate: [DeactivateGuard.canDeactivateFormGuard]},
     ]
   }
 ]

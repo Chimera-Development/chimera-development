@@ -18,14 +18,27 @@
     <div class="row gy-3">
       <div class="col">
         <label for="question" class="form-label">Question</label>
-        <input type="text" class="form-control" id="question" formControlName="question">
+        <div class="form-floating">
+          <input #question type="text"
+                 class="form-control" id="question" formControlName="question">
+          <label for="question"
+                 class="form-label info"
+                 [hidden]="question.value.length > 0">
+            Please enter a question</label>
+        </div>
       </div>
     </div>
 
     <div class="row gy-3">
       <div class="col">
         <label for="answer" class="form-label">Answer</label>
-        <textarea class="form-control" id="answer" rows="3" formControlName="answer"></textarea>
+        <div class="form-floating">
+          <textarea #answer class="form-control" id="answer" rows="3" formControlName="answer"></textarea>
+          <label for="answer"
+                 class="form-label info"
+                 [hidden]="answer.value.length > 0">
+            Please enter an answer</label>
+        </div>
       </div>
     </div>
 
