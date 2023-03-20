@@ -1,0 +1,14 @@
+<div class="container fixed-bottom py-4 w-75 navbar-expand-sm">
+  <div class="row navbar align-items-center bg-black rounded p-3">
+    <div class="col col-md-7">
+      <span>{{ prompt }}</span>
+    </div>
+
+    <div class="col col-md-3">
+      <button type="button" class="btn"
+              (click)="onClose()">Reset</button>
+      <button type="button" class="btn btn-outline-success"
+              (click)="onSaveChanges()">Save Changes</button>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: '', component: FaqComponent,
     canActivateChild: [AuthGuard.canActivateChild],
-    canDeactivate: [DeactivateGuard.canDeactivateDataGuard],
     resolve: [Resolver.faqAnswerResolver],
     children: [
       {path: 'new', component: FaqEditComponent, canDeactivate: [DeactivateGuard.canDeactivateFormGuard]},

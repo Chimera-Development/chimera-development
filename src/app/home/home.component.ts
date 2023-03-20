@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isAuthenticated = false
 
   message: string | null = null
+  unsavedChanges = false
 
   constructor(
     private updateService: UpdateService,
@@ -33,9 +34,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.title = environment.title
     this.updates = this.updateService.getUpdates()
+    this.updateService.setInitialState()
 
     this.updateSubscription = this.updateService.itemsUpdated.subscribe(
-      (updates:Update[]) => this.updates = updates
+      (updates:Update[]) => {
+        this.updates = updates
+        this.unsavedChanges = true
+      }
     )
 
     this.userSubscription = this.authService.userSet.subscribe(user =>
@@ -52,6 +57,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.updateSubscription?.unsubscribe()
     this.userSubscription?.unsubscribe()
+
+    if(this.unsavedChanges) this.updateService.resetUpdates()
   }
 
   onSaveAllUpdates() {
@@ -63,5 +70,15 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onPopupHandle() {
     this.message = null
+  }
+
+  onPromptHandle($event: boolean) {
+    if($event) {
+      this.onSaveAllUpdates()
+    } else {
+      this.updateService.resetUpdates()
+    }
+
+    this.unsavedChanges = false
   }
 }

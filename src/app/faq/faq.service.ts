@@ -8,6 +8,7 @@ import {Subject} from "rxjs";
 export class FaqService {
   faqUpdated = new Subject<FaqAnswer[]>()
   faqAnswers: FaqAnswer[] = []
+  initialFaqState: FaqAnswer[] = []
 
   constructor() { }
 
@@ -48,6 +49,14 @@ export class FaqService {
 
   setAnswers(answers: FaqAnswer[]) {
     this.faqAnswers = answers
+    this.faqUpdated.next(this.faqAnswers.slice())
+  }
+
+  setInitialState() {
+    this.initialFaqState = this.faqAnswers.slice()
+  }
+  resetAnswers() {
+    this.faqAnswers = this.initialFaqState.slice()
     this.faqUpdated.next(this.faqAnswers.slice())
   }
 }

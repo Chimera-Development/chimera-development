@@ -3,6 +3,11 @@
   [message]="message"
   (alertClosed)="onPopupHandle()"></app-alert>
 
+<app-prompt
+  *ngIf="unsavedChanges"
+  prompt="You have unsaved changes!"
+  (promptClosed)="onPromptHandle($event)"></app-prompt>
+
 <div class="container">
   <div class="p-4 p-md-5 mb-4 text-white rounded bg-black">
     <div class="col-md-6 px-0">
@@ -16,13 +21,11 @@
   <div class="container col">
       <div class="row" *ngIf="isAuthenticated">
         <button class="btn btn-outline-info w-25"
-                (click)="onNewUpdate()">New update</button>&nbsp;
-        <button class="btn btn-outline-info w-25"
-                (click)="onSaveAllUpdates()">Save changes</button>
+                (click)="onNewUpdate()">New update</button>
       </div>
 
     <div class="row py-4">
-      <hr class="w-50">
+      <hr class="w-25">
     </div>
 
     <div class="row justify-content-start">

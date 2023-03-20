@@ -15,14 +15,3 @@ export const canDeactivateFormGuard: CanDeactivateFn<CanComponentDeactivate> = (
     }
   )
 }
-
-export const canDeactivateDataGuard: CanDeactivateFn<CanComponentDeactivate> = (
-  component:CanComponentDeactivate
-):Observable<boolean | UrlTree> => {
-  return new Observable<boolean | UrlTree>((subscriber) => {
-    return component.canDeactivate() ?
-      subscriber.next(true) :
-      subscriber.next(false)
-    }
-  )
-}

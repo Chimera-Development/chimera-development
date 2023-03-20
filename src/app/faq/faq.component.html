@@ -3,6 +3,11 @@
   [message]="message"
   (alertClosed)="onPopupHandle()"></app-alert>
 
+<app-prompt
+  *ngIf="unsavedChanges"
+  prompt="You have unsaved changes!"
+  (promptClosed)="onPromptHandle($event)"></app-prompt>
+
 <div class="col">
   <h1>How to install the client?</h1>
   <ul class="fs-5 col-md-8">

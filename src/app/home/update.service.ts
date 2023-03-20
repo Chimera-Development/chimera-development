@@ -9,6 +9,7 @@ export class UpdateService {
   itemsUpdated = new Subject<Update[]>()
 
   updates: Update[] = []
+  initialUpdateState: Update[] = []
 
   getUpdates(): Update[] {
     return this.updates.slice()
@@ -36,6 +37,14 @@ export class UpdateService {
 
   setUpdates(updates: Update[]) {
     this.updates = updates
+    this.itemsUpdated.next(this.updates.slice())
+  }
+
+  setInitialState() {
+    this.initialUpdateState = this.updates.slice()
+  }
+  resetUpdates() {
+    this.updates = this.initialUpdateState.slice()
     this.itemsUpdated.next(this.updates.slice())
   }
 }
